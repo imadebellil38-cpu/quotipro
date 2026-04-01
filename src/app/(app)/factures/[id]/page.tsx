@@ -80,6 +80,14 @@ export default async function PageDetailFacture({ params }: { params: Promise<{ 
           </div>
         )}
       </div>
+
+      <a
+        href={`/api/factures/${id}/pdf`}
+        target="_blank"
+        className="rounded-xl bg-bleu py-3 text-center font-semibold text-white block"
+      >
+        Télécharger le PDF
+      </a>
     </div>
   )
 }

@@ -87,6 +87,14 @@ export default async function PageDetailDevis({ params }: { params: Promise<{ id
           Valide jusqu&apos;au {new Date(devis.valid_until).toLocaleDateString('fr-FR')}
         </p>
       )}
+
+      <a
+        href={`/api/devis/${id}/pdf`}
+        target="_blank"
+        className="rounded-xl bg-bleu py-3 text-center font-semibold text-white block"
+      >
+        Télécharger le PDF
+      </a>
     </div>
   )
 }
