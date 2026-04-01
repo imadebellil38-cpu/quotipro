@@ -1,10 +1,12 @@
 import { SupabaseClient } from '@supabase/supabase-js'
 import { creerClient, listerClients } from '@/lib/db/clients'
 import { creerDevis, genererReference, listerDevis } from '@/lib/db/devis'
-import { creerFacture, genererReferenceFacture, listerFactures, modifierStatutFacture, getFacture } from '@/lib/db/factures'
+import { creerFacture, genererReferenceFacture, listerFactures, modifierStatutFacture } from '@/lib/db/factures'
 import { creerChantier, listerChantiers } from '@/lib/db/chantiers'
 import { getDevis } from '@/lib/db/devis'
-import type { StatutDevis, StatutFacture, StatutChantier } from '@/types'
+import { listerEmployes, creerEmploye } from '@/lib/db/employes'
+import { creerRelance } from '@/lib/db/relances'
+import type { StatutDevis, StatutFacture, StatutChantier, RoleEmploye, TypeContrat } from '@/types'
 
 export async function executerTool(
   supabase: SupabaseClient,
@@ -181,6 +183,48 @@ export async function executerTool(
           `- Factures impayées : ${facturesImpayees.length} pour ${fmt.format(montantImpayes)}\n` +
           `- Chantiers en cours : ${chantiersEnCours.length}\n` +
           `- Total devis : ${devisRes.length} | Total factures : ${facturesRes.length}`,
+      }
+    }
+
+    case 'lister_employes': {
+      const employes = await listerEmployes(supabase, profileId)
+      if (employes.length === 0) return { result: 'Aucun employé enregistré.' }
+      const liste = employes.map(e =>
+        `- ${e.first_name} ${e.last_name} — ${e.role} — ${e.contract_type}${e.hourly_rate ? ` — ${e.hourly_rate}€/h` : ''} [ID: ${e.id}]`
+      ).join('\n')
+      return { result: `${employes.length} employé(s) :\n${liste}` }
+    }
+
+    case 'creer_employe': {
+      const employe = await creerEmploye(supabase, profileId, {
+        first_name: input.first_name as string,
+        last_name: input.last_name as string,
+        email: input.email as string | undefined,
+        role: (input.role as RoleEmploye) || 'ouvrier',
+        hourly_rate: input.hourly_rate as number | undefined,
+        contract_type: (input.contract_type as TypeContrat) || 'cdi',
+        start_date: input.start_date as string | undefined,
+      })
+      return {
+        result: `Employé ${employe.first_name} ${employe.last_name} ajouté !`,
+        metadata: { action: 'employe_cree', employe_id: employe.id },
+      }
+    }
+
+    case 'planifier_relance': {
+      const jours = (input.jours as number) || 7
+      const scheduledAt = new Date(Date.now() + jours * 24 * 60 * 60 * 1000).toISOString()
+
+      const type = input.devis_id ? 'devis' : 'impaye'
+      const relance = await creerRelance(supabase, profileId, {
+        devis_id: input.devis_id as string | undefined,
+        facture_id: input.facture_id as string | undefined,
+        scheduled_at: scheduledAt,
+        type,
+      })
+      return {
+        result: `Relance planifiée dans ${jours} jour(s) pour le ${new Date(scheduledAt).toLocaleDateString('fr-FR')}.`,
+        metadata: { action: 'relance_planifiee', relance_id: relance.id },
       }
     }
 

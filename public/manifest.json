@@ -1,0 +1,16 @@
+{
+  "name": "QuotiPro",
+  "short_name": "QuotiPro",
+  "description": "L'assistant IA des artisans BTP — Devis, factures, chantiers",
+  "start_url": "/chat",
+  "display": "standalone",
+  "background_color": "#F8FAFC",
+  "theme_color": "#1B2B4B",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "64x64",
+      "type": "image/x-icon"
+    }
+  ]
+}

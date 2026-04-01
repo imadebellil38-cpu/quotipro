@@ -131,4 +131,41 @@ export const outils: Anthropic.Tool[] = [
       properties: {},
     },
   },
+  {
+    name: 'lister_employes',
+    description: "Lister les employés de l'artisan.",
+    input_schema: {
+      type: 'object' as const,
+      properties: {},
+    },
+  },
+  {
+    name: 'creer_employe',
+    description: "Ajouter un nouvel employé.",
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        first_name: { type: 'string', description: 'Prénom' },
+        last_name: { type: 'string', description: 'Nom' },
+        email: { type: 'string', description: 'Email' },
+        role: { type: 'string', enum: ['ouvrier', 'etam', 'cadre'], description: 'Rôle' },
+        hourly_rate: { type: 'number', description: 'Taux horaire' },
+        contract_type: { type: 'string', enum: ['cdi', 'cdd', 'interim'], description: 'Type de contrat' },
+        start_date: { type: 'string', description: 'Date embauche (YYYY-MM-DD)' },
+      },
+      required: ['first_name', 'last_name'],
+    },
+  },
+  {
+    name: 'planifier_relance',
+    description: "Planifier une relance pour un devis non signé ou une facture impayée.",
+    input_schema: {
+      type: 'object' as const,
+      properties: {
+        devis_id: { type: 'string', description: 'ID du devis à relancer' },
+        facture_id: { type: 'string', description: 'ID de la facture à relancer' },
+        jours: { type: 'number', description: 'Nombre de jours avant la relance (défaut 7)', default: 7 },
+      },
+    },
+  },
 ]

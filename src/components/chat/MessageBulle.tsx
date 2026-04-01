@@ -1,4 +1,7 @@
+'use client'
+
 import Link from 'next/link'
+import Markdown from 'react-markdown'
 
 interface Props {
   role: "user" | "assistant"
@@ -28,7 +31,13 @@ export default function MessageBulle({ role, contenu, metadata }: Props) {
             : "rounded-bl-md bg-white text-gray-800 shadow-sm"
         }`}
       >
-        <div className="whitespace-pre-wrap">{contenu}</div>
+        {estUtilisateur ? (
+          <div className="whitespace-pre-wrap">{contenu}</div>
+        ) : (
+          <div className="prose prose-sm max-w-none prose-p:my-1 prose-ul:my-1 prose-li:my-0 prose-strong:text-bleu">
+            <Markdown>{contenu}</Markdown>
+          </div>
+        )}
         {actionConfig && actionId && (
           <Link
             href={actionConfig.href(actionId)}
