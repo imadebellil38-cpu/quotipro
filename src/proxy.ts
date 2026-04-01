@@ -27,8 +27,11 @@ export async function proxy(request: NextRequest) {
 
   const { data: { user } } = await supabase.auth.getUser()
 
-  // Rediriger vers connexion si non authentifié sur routes protégées
-  if (!user && request.nextUrl.pathname.startsWith('/(app)')) {
+  // Routes protégées — route groups ne font pas partie de l'URL
+  const routesProtegees = ['/chat', '/devis', '/factures', '/chantiers', '/parametres', '/onboarding']
+  const estRouteProtegee = routesProtegees.some(r => request.nextUrl.pathname.startsWith(r))
+
+  if (!user && estRouteProtegee) {
     const url = request.nextUrl.clone()
     url.pathname = '/connexion'
     return NextResponse.redirect(url)

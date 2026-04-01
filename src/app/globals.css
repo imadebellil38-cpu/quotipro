@@ -12,7 +12,7 @@
   --color-foreground: var(--foreground);
   --color-bleu: var(--bleu-marine);
   --color-orange: var(--orange);
-  --font-sans: var(--font-inter);
+  --font-sans: system-ui, -apple-system, sans-serif;
 }
 
 body {
