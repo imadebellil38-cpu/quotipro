@@ -3,8 +3,16 @@
 :root {
   --bleu-marine: #1B2B4B;
   --orange: #F97316;
-  --background: #F8FAFC;
+  --orange-light: #FFF7ED;
+  --background: #FAFAF8;
   --foreground: #1B2B4B;
+  --gris-50: #F8FAFC;
+  --gris-100: #F1F5F9;
+  --gris-200: #E2E8F0;
+  --gris-400: #94A3B8;
+  --gris-500: #64748B;
+  --gris-700: #334155;
+  --gris-900: #0F172A;
 }
 
 @theme inline {
@@ -12,10 +20,83 @@
   --color-foreground: var(--foreground);
   --color-bleu: var(--bleu-marine);
   --color-orange: var(--orange);
-  --font-sans: system-ui, -apple-system, sans-serif;
+  --color-orange-light: var(--orange-light);
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Card hover effect */
+.card-hover {
+  transition: all 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+/* Gradient backgrounds */
+.bg-gradient-hero {
+  background: linear-gradient(135deg, #1B2B4B 0%, #0F172A 100%);
+}
+
+.bg-gradient-orange {
+  background: linear-gradient(135deg, #F97316 0%, #EA580C 100%);
+}
+
+/* Glassmorphism nav */
+.glass-nav {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* Pulse animation for CTA */
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+.pulse-cta:hover {
+  animation: pulse-soft 1.5s ease-in-out infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeInUp 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fadeInUp 0.6s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.animate-fade-in-delay-2 {
+  animation: fadeInUp 0.6s ease-out 0.4s forwards;
+  opacity: 0;
 }
