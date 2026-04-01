@@ -24,13 +24,19 @@ export default function Inscription() {
       return
     }
 
-    const { error } = await supabase.auth.signUp({
+    const { error, data } = await supabase.auth.signUp({
       email,
       password: motDePasse,
     })
 
     if (error) {
-      setErreur("Impossible de créer le compte. Réessaie.")
+      setErreur(error.message)
+      setChargement(false)
+      return
+    }
+
+    if (!data.user) {
+      setErreur("Erreur inattendue. Réessaie.")
       setChargement(false)
       return
     }
