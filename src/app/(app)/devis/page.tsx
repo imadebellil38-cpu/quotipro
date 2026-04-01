@@ -30,16 +30,16 @@ export default async function PageDevis() {
             <Link
               key={d.id}
               href={`/devis/${d.id}`}
-              className="flex items-center justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+              className="card-hover flex items-center justify-between rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
             >
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-semibold text-bleu">{d.reference}</span>
-                <span className="text-xs text-gray-500">
+              <div className="flex flex-col gap-1.5">
+                <span className="text-sm font-bold text-bleu">{d.reference}</span>
+                <span className="text-xs text-gray-400">
                   {d.clients?.name || 'Sans client'} {d.objet ? `— ${d.objet}` : ''}
                 </span>
               </div>
-              <div className="flex flex-col items-end gap-1">
-                <Montant valeur={d.total_ttc} className="text-sm font-bold text-bleu" />
+              <div className="flex flex-col items-end gap-1.5">
+                <Montant valeur={d.total_ttc} className="text-sm font-extrabold text-bleu" />
                 <Badge statut={d.status} />
               </div>
             </Link>

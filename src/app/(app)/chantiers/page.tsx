@@ -30,20 +30,20 @@ export default async function PageChantiers() {
             <Link
               key={c.id}
               href={`/chantiers/${c.id}`}
-              className="flex items-center justify-between rounded-xl border border-gray-100 bg-white p-4 shadow-sm"
+              className="card-hover flex items-center justify-between rounded-2xl border border-gray-100 bg-white p-4 shadow-sm"
             >
-              <div className="flex flex-col gap-1">
-                <span className="text-sm font-semibold text-bleu">{c.name}</span>
-                <span className="text-xs text-gray-500">{c.clients?.name || 'Sans client'}</span>
-                {c.address && <span className="text-xs text-gray-400">{c.address}</span>}
+              <div className="flex flex-col gap-1.5">
+                <span className="text-sm font-bold text-bleu">{c.name}</span>
+                <span className="text-xs text-gray-400">{c.clients?.name || 'Sans client'}</span>
+                {c.address && <span className="text-xs text-gray-300">{c.address}</span>}
               </div>
-              <div className="flex flex-col items-end gap-1">
+              <div className="flex flex-col items-end gap-1.5">
                 {c.estimated_amount && (
-                  <Montant valeur={c.estimated_amount} className="text-sm font-bold text-bleu" />
+                  <Montant valeur={c.estimated_amount} className="text-sm font-extrabold text-bleu" />
                 )}
                 <Badge statut={c.status} />
                 {c.actual_hours > 0 && (
-                  <span className="text-xs text-gray-400">{c.actual_hours}h effectuées</span>
+                  <span className="text-xs text-gray-300">{c.actual_hours}h</span>
                 )}
               </div>
             </Link>

@@ -10,13 +10,15 @@ export default function ListeVide({
   actionHref?: string
 }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 text-center">
-      <div className="mb-4 text-4xl text-gray-300">0</div>
-      <p className="mb-4 text-gray-500">{message}</p>
+    <div className="flex flex-col items-center justify-center py-20 text-center px-4">
+      <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gray-100 text-3xl text-gray-300 mb-6">
+        0
+      </div>
+      <p className="text-gray-500 mb-6">{message}</p>
       {actionLabel && actionHref && (
         <Link
           href={actionHref}
-          className="rounded-lg bg-orange px-4 py-2 text-sm font-medium text-white"
+          className="bg-gradient-orange rounded-xl px-6 py-3 text-sm font-bold text-white shadow-md shadow-orange-200"
         >
           {actionLabel}
         </Link>

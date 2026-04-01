@@ -15,7 +15,7 @@ export default async function AppLayout({
   }
 
   return (
-    <div className="flex min-h-screen flex-col pb-16">
+    <div className="flex min-h-screen flex-col bg-background pb-20">
       <main className="flex-1">{children}</main>
       <NavMobile />
     </div>

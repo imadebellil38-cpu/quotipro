@@ -10,12 +10,12 @@ export default function PageHeader({
   actionHref?: string
 }) {
   return (
-    <div className="flex items-center justify-between px-4 py-4">
-      <h1 className="text-xl font-bold text-bleu">{titre}</h1>
+    <div className="flex items-center justify-between px-4 py-5">
+      <h1 className="text-2xl font-extrabold text-bleu">{titre}</h1>
       {actionLabel && actionHref && (
         <Link
           href={actionHref}
-          className="rounded-lg bg-orange px-4 py-2 text-sm font-medium text-white"
+          className="bg-gradient-orange rounded-xl px-4 py-2.5 text-sm font-bold text-white shadow-md shadow-orange-200"
         >
           {actionLabel}
         </Link>

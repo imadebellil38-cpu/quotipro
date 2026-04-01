@@ -13,20 +13,22 @@ export default async function PageParametres() {
 
   return (
     <div className="flex flex-col gap-4 p-4">
-      <h1 className="text-xl font-bold text-bleu">Mon profil</h1>
+      <h1 className="text-2xl font-extrabold text-bleu">Mon profil</h1>
 
-      <div className="flex gap-3">
+      <div className="grid grid-cols-2 gap-3">
         <Link
           href="/parametres/employes"
-          className="flex-1 rounded-xl border border-gray-100 bg-white p-4 text-center text-sm font-medium text-bleu shadow-sm"
+          className="card-hover flex flex-col items-center gap-2 rounded-2xl border border-gray-100 bg-white p-5 shadow-sm"
         >
-          Mes employés
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-blue-50 text-xl">👷</div>
+          <span className="text-sm font-bold text-bleu">Mes employés</span>
         </Link>
         <Link
           href="/abonnement"
-          className="flex-1 rounded-xl border border-orange bg-orange/5 p-4 text-center text-sm font-medium text-orange shadow-sm"
+          className="card-hover flex flex-col items-center gap-2 rounded-2xl border-2 border-orange bg-orange-light p-5 shadow-sm"
         >
-          Mon abonnement
+          <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-orange/10 text-xl">⭐</div>
+          <span className="text-sm font-bold text-orange">Mon abonnement</span>
         </Link>
       </div>
 
