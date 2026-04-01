@@ -133,8 +133,9 @@ export async function POST(request: Request) {
     })
   } catch (error) {
     console.error('Erreur agent:', error)
+    const msg = error instanceof Error ? error.message : 'Erreur inconnue'
     return Response.json(
-      { reponse: "Désolé, j'ai un souci technique. Réessaie dans un instant." },
+      { reponse: `Erreur technique : ${msg}` },
       { status: 500 }
     )
   }
